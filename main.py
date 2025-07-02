@@ -1,0 +1,10 @@
+print("Hello World",7)
+print(369)
+print("Bye")
+print(12*2)
+print("Twinkle twinkle little star \nHow I wonder what you are!\nUp above the world so high,\nLike a diamond in the sky.\n")
+
+print("Greetings!!\n","Myself Easha Akram" )
+print("Today I'm Writing my first code in Python Language")
+print("Lets Start with Simple Calculation","\nWhat will be answer of 11 multiplay by 2345")
+print("Solve it by Python Code","\n11 * 2345 = ",11*2345)
