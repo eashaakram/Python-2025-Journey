@@ -1,6 +1,6 @@
 # This Code is about Arithmetic Operators
 print("\t****Welcome to Calculator****\n")
-num1=int(input("Enter first number: "))
+num1=int(input("Enter first number: ")) #Addition
 num2=int(input("Enter second number: "))
 print("Addition: ",num1,"+",num2,"=",num1+num2)
 print("Subtraction: ",num1,"-",num2,"=",num1-num2)
