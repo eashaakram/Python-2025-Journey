@@ -1,7 +1,8 @@
-a = 1
-b = True
-c = "Python" 
-d = None
+a = 1 #integer
+b = True #boolean
+c = "Python" #string
+d = None #none
+
 print(a)
 print(b)
 print(c)
