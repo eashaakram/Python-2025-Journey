@@ -40,7 +40,7 @@ print(course[2:len(course)-3])
 #Quick Quiz
 nm = "harry"
 print(nm[-4:-2])
-'''It will first minus 4 from total which is 5 so 
+print('''It will first minus 4 from total which is 5 so 
 index start from 1 and then it will minus 2 from 5 which left with 
 3 index so it will print from 1 to 3 index means 1,2 because in 
-that form[1:3] 1 is included and 3 is excluded'''
+that form[1:3] 1 is included and 3 is excluded''')
