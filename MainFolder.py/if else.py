@@ -16,3 +16,11 @@ print(a<=18)
 print(a>=18)
 print(a==18)
 print(a!=18)
+
+#example
+apple = 120
+budget = 200
+if(apple <= budget):
+    print("Alexa, add 1kg Apples to the cart")
+else:
+    print("Alexa, add 1kg Apples to the cart")
