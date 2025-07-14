@@ -5,3 +5,11 @@ if(a>18):
     print("You can drive")
 else:
     print("You can't drive")
+#Conditional Operators
+# >,<,>=,<=,==,!=
+print(a<18)
+print(a>18)
+print(a<=18)
+print(a>=18)
+print(a==18)
+print(a!=18)
