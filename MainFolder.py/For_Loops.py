@@ -15,9 +15,9 @@ for color in colors:
         print(i)
 
 #range
-for k in range(5):
+for k in range(5): #n-1
     print(k)
 for k in range(5):
     print(k+1)
-for k in range(1,10):
+for k in range(1,11):
     print(k)
