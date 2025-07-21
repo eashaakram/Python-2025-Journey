@@ -15,7 +15,7 @@ a = 2
 b = 3
 calculateGmean(a, b) #calling a function 
 isGreater(a , b)
-islesser(a, b)
+
 
 
 
