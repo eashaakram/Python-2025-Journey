@@ -11,6 +11,7 @@ for i in range(10):
       continue #it will just skip the iteration at 6
     print("2 *",i+1,"=",2*(i+1))
 
+#do while loop
 f = 0
 while True:
    print(f)
