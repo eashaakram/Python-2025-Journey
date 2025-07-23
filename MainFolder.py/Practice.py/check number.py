@@ -23,9 +23,6 @@ while True:
           j = int(t)
        else:
           print("Invalid!!Enter number like (1,2,3..)")
-          
-          
-  
       print(j,"is positive number")
       break
     else:
