@@ -22,6 +22,15 @@ avg(h = 9,g = 21)
  
  
 def ave(i,j = 1):        
-    print("1)The average is",(i+j)/2)
+    print("5)The average is",(i+j)/2)
 
 ave(i = 21) #required argument, the value of i is complusory 
+
+#variable length argument
+def aveg(*number): #now u can give many argument as u want
+    sum = 0 
+    for i in number:
+     sum = sum + i
+    print("6)The average is",sum/len(number))
+
+aveg(5,6,7)
