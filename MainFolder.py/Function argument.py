@@ -33,9 +33,19 @@ def aveg(*number): #now u can give many argument as u want
      sum = sum + i
     print("6)The average is",sum/len(number))
 
-aveg(5,6,7)
+aveg(5,6,7,1)
 
 def name(**name):
     print("Hello,",name["fname"],name["mname"],name["lname"])
     
 name(mname = "Buchana", lname = "Barnes", fname = "James")
+
+#return 
+def avgg(*number):
+    sum = 0
+    for i in number:
+     sum = sum + i
+    return sum/len(number)
+    
+c = avgg(5,6,7,1)
+print(c)
