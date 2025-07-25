@@ -49,3 +49,8 @@ def avgg(*number):
     
 c = avgg(5,6,7,1)
 print(c)
+
+def name(*name):
+    print("Hello,",name[0],name[1],name[2])
+    
+name("Buchana", "Barnes", "James")
