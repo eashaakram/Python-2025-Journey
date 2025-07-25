@@ -34,3 +34,8 @@ def aveg(*number): #now u can give many argument as u want
     print("6)The average is",sum/len(number))
 
 aveg(5,6,7)
+
+def name(**name):
+    print("Hello,",name["fname"],name["mname"],name["lname"])
+    
+name(mname = "Buchana", lname = "Barnes", fname = "James")
