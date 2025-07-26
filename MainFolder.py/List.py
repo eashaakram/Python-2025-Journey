@@ -11,3 +11,5 @@ lst2 = ["Red", "Green", "Blue"]
 print(lst1)
 print(lst2)
 
+details = ["Eesha", 19, "Akram", 9.8]
+print(details)
