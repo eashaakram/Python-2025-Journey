@@ -13,3 +13,29 @@ print(lst2)
 
 details = ["Eesha", 19, "Akram", 9.8]
 print(details)
+
+#negative indexing
+      #[0,1,2,3,4] positive index start from zero
+mark = [3, 5, 6, "Python", False]
+      #[-5,-4,-3,-2,-1] in negative 
+print("Below there will four outputs of 6")
+print(mark[-3])
+print(mark[len(mark)-3]) #positive index
+print(mark[5-3])
+print(marks[2])
+
+if 7 in mark:
+    print("Yes, 7 in list mark")
+else:
+    print("No, 7 is not in list mark")
+if 6 in mark:
+    print("Yes, 6 in list mark")
+else:
+    print("No, 6 is not in list mark")
+if "6" in mark:
+    print("Yes, \'6\' in list mark")
+else:
+    print("No, \'6\' is not in list mark")
+    #Some thing that applies for string
+if "Py" in "Python":
+    print("yes")
