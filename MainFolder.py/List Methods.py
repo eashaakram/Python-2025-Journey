@@ -30,3 +30,15 @@ print("L ",l)
 l.insert(1,899)
 print("Insert value at index 1 ",l)
 
+l = [11,45,1,2,4,6]
+print("L ",l)
+m = [900, 1000, 1100]
+l.extend(m)
+print("Extend ",l)
+
+l = [11,45,1,2,4,6]
+print("L ",l)
+m = [900, 1000, 1100]
+k = l + m
+print ("Extend with new variable ",k)
+print("Original remains same ",l)
