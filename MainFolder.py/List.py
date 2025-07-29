@@ -39,3 +39,15 @@ else:
     #Some thing that applies for string
 if "Py" in "Python":
     print("yes")
+
+#List Comprehension
+lst = [i for i in range(4)]
+print (lst)
+lst = [i*i for i in range(4)]
+print (lst)
+lst = [i*i for i in range(10)if i%2==0] #with condition
+print (lst)
+
+names = ["Mama","Papa","Brother","Sister"]
+name = [item for item in names if "o" in item]
+print(name)
