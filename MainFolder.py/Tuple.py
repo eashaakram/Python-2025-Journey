@@ -29,3 +29,8 @@ temp.pop(3) #Remove item
 temp[2] = "Finland" #Change item
 countries = tuple(temp)
 print("Countries after change:",countries)
+
+country = ("Pakistan", "Afghanistan", "Bangladesh", "SriLanka")
+country2 = ("Vietnam", "India", "China")
+combine = country + country2
+print(combine)
