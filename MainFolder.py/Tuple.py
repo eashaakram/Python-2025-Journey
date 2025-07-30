@@ -39,3 +39,14 @@ print(combine)
 tuple1 = (0,1,2,3,2,3,1,3,2,3)
 res = tuple1.count(3)
 print("3 comes in tuple1",res,"times")
+
+tuple1 = (0,1,2,3,2,3,1,3,2,3)
+res = tuple1.index(3)
+print("3 comes at index:",res)
+#slicing
+tuple1 = (0,1,2,3,2,3,1,3,2,3)
+res = tuple1.index(3,4,8)
+print("3 comes at index from index 4 to 7:",res)
+#length in tuple
+res = len(tuple1)
+print("Length of Tuple is",res)
