@@ -34,3 +34,8 @@ country = ("Pakistan", "Afghanistan", "Bangladesh", "SriLanka")
 country2 = ("Vietnam", "India", "China")
 combine = country + country2
 print(combine)
+
+#Methods in Tuple
+tuple1 = (0,1,2,3,2,3,1,3,2,3)
+res = tuple1.count(3)
+print("3 comes in tuple1",res,"times")
