@@ -82,3 +82,4 @@ while(i < len(nums)):
     else:
         print("finding...")
     i+=1
+    
