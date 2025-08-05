@@ -37,3 +37,27 @@ i = 1
 while(i <= 100):
     print(i)
     i+=1
+print("Another loop")
+j = 100
+while(j >= 1):
+    print(j)
+    j-=1
+
+k = 1
+while(k <= 100):
+    print("Hi",k)
+    k+=1
+
+l = 1
+print("L:-")
+while(l <= 5):
+   print(l)
+   l+=1
+print("Loop Ended")
+
+print("Table")
+n = int(input("Enter any number:"))
+i = 1
+while(i <= 10):
+    print(n,"*",i,"=",i*n)
+    i+=1
