@@ -28,36 +28,43 @@
 #     print("I'm inside the else part")
 
 
-count = 1
-while (count <= 5):
-    count += 1
-print(count)
+# count = 1
+# while (count <= 5):
+#     count += 1
+# print(count)
 
-i = 1
-while(i <= 100):
-    print(i)
-    i+=1
-print("Another loop")
-j = 100
-while(j >= 1):
-    print(j)
-    j-=1
+# i = 1
+# while(i <= 100):
+#     print(i)
+#     i+=1
+# print("Another loop")
+# j = 100
+# while(j >= 1):
+#     print(j)
+#     j-=1
 
-k = 1
-while(k <= 100):
-    print("Hi",k)
-    k+=1
+# k = 1
+# while(k <= 100):
+#     print("Hi",k)
+#     k+=1
 
-l = 1
-print("L:-")
-while(l <= 5):
-   print(l)
-   l+=1
-print("Loop Ended")
+# l = 1
+# print("L:-")
+# while(l <= 5):
+#    print(l)
+#    l+=1
+# print("Loop Ended")
 
-print("Table")
-n = int(input("Enter any number:"))
-i = 1
-while(i <= 10):
-    print(n,"*",i,"=",i*n)
-    i+=1
+# print("Table")
+# n = int(input("Enter any number:"))
+# i = 1
+# while(i <= 10):
+#     print(n,"*",i,"=",i*n)
+#     i+=1
+
+num = [1,4,9,11,25,36,49,64,81,100]
+i = 0
+while(i < len(num)):
+    print(num[i])
+    i += 1
+
