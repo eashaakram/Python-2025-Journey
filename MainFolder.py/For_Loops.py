@@ -24,3 +24,6 @@ for k in range(5):
 print("K range from 1 to 10")    
 for k in range(1,11):
     print(k)
+
+
+
