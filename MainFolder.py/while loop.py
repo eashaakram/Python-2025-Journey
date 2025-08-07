@@ -111,13 +111,23 @@
 #     print(i)
 #     i-=1
 
-#print series use while loop
+# #print series use while loop
+# start = int (input("Enter starting number:"))
+# stop = int (input("Enter ending number:"))
+# if (start < stop ):
+#     start+=1
+#     while(start < stop):
+#         print(start)
+#         start+=1
+#     else:
+#         print("Invalid Inputs")
+
 start = int (input("Enter starting number:"))
 stop = int (input("Enter ending number:"))
-if (start < stop ):
+while(stop <= start):
+    print("Invalid number!\nStop number must be greater than start")
+    start = int (input("Enter again starting number:"))
+    stop = int (input("Enter again ending number:"))
+while(start<stop):
+    print(start)
     start+=1
-    while(start < stop):
-        print(start)
-        start+=1
-    else:
-        print("Invalid Inputs")
