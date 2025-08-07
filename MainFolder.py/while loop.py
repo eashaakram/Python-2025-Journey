@@ -55,12 +55,12 @@
 #    l+=1
 # print("Loop Ended")
 
-# print("Table")
-# n = int(input("Enter any number:"))
-# i = 1
-# while(i <= 10):
-#     print(n,"*",i,"=",i*n)
-#     i+=1
+print("Table")
+n = int(input("Enter any number:"))
+i = 1
+while(i <= 10):
+    print(n,"*",i,"=",i*n)
+    i+=1
 
 # num = [1,4,9,11,25,36,49,64,81,100]
 # i = 0
@@ -83,11 +83,26 @@
 #         print("finding...")
 #     i+=1
     
-a = 0
-while a<3:
-    if a==4:
-        break
-    print(a,end=", ")
-    a+=1
-else:
-    print("\nLoop finished without break")
+# a = 0
+# while a<3:
+#     if a==4:
+#         break
+#     print(a,end=", ")
+#     a+=1
+# else:
+#     print("\nLoop finished without break")
+
+i = 0
+a = "Akram"
+while(i < 10):
+    # print("Easha")
+    print(f"{i+1} times Easha {a}")
+    i+=1
+
+sum = 0
+i = 1
+while(i<=3):
+    sum+=i
+    i+=1
+print(f"Sum of the series is {sum}")    
+
