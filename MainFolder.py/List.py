@@ -59,3 +59,8 @@ list.append("welcome!")
 print("updated list:",list)
 
 #Adding list to list
+list = ["hi","hello"]
+print("Old list:",list)
+list1 = ["welcome!"]
+list.append(list1)
+print("updated list:",list)
