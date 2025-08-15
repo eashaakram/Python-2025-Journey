@@ -51,10 +51,23 @@
 # res = len(tuple1)
 # print("Length of Tuple is",res)
 
-numbers = (2,3,1,4)
-print("Length :",len(numbers))
-sorted_num = sorted(numbers)
-print("Sorted numbers :",sorted_num)
-print("Sum of numbers :",sum(numbers))
-print("Minimum :",min(numbers))
-print("Maximum :",max(numbers))
+# numbers = (2,3,1,4)
+# print("Length :",len(numbers))
+# sorted_num = sorted(numbers)
+# print("Sorted numbers :",sorted_num)
+# print("Sum of numbers :",sum(numbers))
+# print("Minimum :",min(numbers))
+# print("Maximum :",max(numbers))
+
+##Mixed Data type tuple
+data = ("Orange", 46, 3, 79, True, "Apple", "Apple", False)
+#Display
+print("Tuple data:", data)
+#First and last element
+print("First element is:",data[0])
+print("Last element is:",data[-1])
+#Count
+item = "Apple"
+print(f"{item} appears {data.count(item)} times")
+#length
+print("Length of tuple is:",len(data))
