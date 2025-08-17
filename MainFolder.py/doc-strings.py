@@ -18,3 +18,6 @@ def square(n):
 
 square(5)
 print(square.__doc__)#it will give none as output
+
+#Zen of Python
+import this
