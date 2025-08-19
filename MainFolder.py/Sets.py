@@ -1,21 +1,21 @@
-# #It is not set it will become dectionary 
-# # harry = {}
-# #for printing its type as a set we will write it like that
-# harry = set()
-# print(type(harry))
+#It is not set it will become dectionary 
+# harry = {}
+#for printing its type as a set we will write it like that
+harry = set()
+print(type(harry))
 
-# info = {"Carla", 19, False, 5.9, 19} #Set will remove duplicates
-# print(info)
-# #Set is unordered
-# for value in info:
-#     print(value,end=" ")
+info = {"Carla", 19, False, 5.9, 19} #Set will remove duplicates
+print(info)
+#Set is unordered
+for value in info:
+    print(value,end=" ")
 
-# #Sets Methods
-# s1 = {1,2,5,6}
-# s2 = {3,6,4,7}
-# print("Union =",s1.union(s2))
-# s1.update(s2)
-# print("Update =",s1,s2)
+#Sets Methods
+s1 = {1,2,5,6}
+s2 = {3,6,4,7}
+print("Union =",s1.union(s2))
+s1.update(s2)
+print("Update =",s1,s2)
 
 cities = {"Lahore", "Karachi", "Gujranwala", "Islamabad", "KPK"}
 cities2 = {"Lahore", "Karachi", "KPK", "RWP"}
