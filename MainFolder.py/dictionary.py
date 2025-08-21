@@ -7,14 +7,16 @@ info = {"Name" : "Easha",
         "Age" : 19,
         "Eligible" : True}
 print(info) 
+
 #accessing keys
-print("KEYS")
-print(info.keys()) # -> 1 method
+print(info.keys()) 
+
 #accessing values
-print("VALUES")
-for key in info.keys(): # -> 2 method
+print(info.values())
+for key in info.keys(): 
     print(info[key])
 print("end") 
+
 #Two ways of getting any single key
 print(info["Name"])#If I wrote Name2 it will generate error
 print(info.get("Name"))#If I wrote Name2 it will not generate error
