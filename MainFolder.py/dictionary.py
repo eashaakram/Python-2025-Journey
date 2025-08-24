@@ -29,3 +29,6 @@ print(info.get("Name"))#If I wrote Name2 it will not generate error
 print(info.get("Name2"))#it will give output none
 
 print(info.items())
+ 
+
+#Dictionary Methods
