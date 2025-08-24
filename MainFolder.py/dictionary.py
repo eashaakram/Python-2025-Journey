@@ -32,3 +32,7 @@ print(info.items())
  
 
 #Dictionary Methods
+ep1={122:45, 78:82}
+ep2={823:63, 72:27}
+ep1.update(ep2)
+print(ep1)
