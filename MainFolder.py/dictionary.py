@@ -38,3 +38,21 @@ ep1.update(ep2)
 ep1.clear() #it will print empty dictionary
 print(ep1)
 
+#create empty dictionary
+empt = {}
+print(empt)
+
+ep3={122:45, 123:89, 67:69, 670:69}
+#pop() is used to remove key
+ep3.pop(122)
+print(ep3)
+#popitem() remove last item
+ep4={122:45, 123:89, 67:69, 670:69}
+ep4.popitem()
+print (ep4)
+ep5={122:45, 123:89, 67:69, 670:69}
+del ep5
+# print(ep5)generate error
+ep6={122:45, 123:89, 67:69, 670:69}
+del ep6[122]
+print(ep6)
