@@ -39,3 +39,9 @@ print(com+num)
 inte=90
 fl=8.70
 print(inte+fl)
+
+res = True
+int_res = int(res)
+print(int_res)#1
+
+print(True+10)
