@@ -30,3 +30,12 @@ num1="14"
 num2=34
 new=int(num1)
 print(new+num2)
+
+#implicit typecasting
+com=7+8j
+num=90
+print(com+num)
+
+inte=90
+fl=8.70
+print(inte+fl)
