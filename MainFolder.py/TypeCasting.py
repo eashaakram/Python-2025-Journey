@@ -45,3 +45,7 @@ int_res = int(res)
 print(int_res)#1
 
 print(True+10)
+
+#location in memory
+name="Ali"
+print(id(num))
