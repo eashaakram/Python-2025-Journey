@@ -20,3 +20,12 @@ c = int(input("Enter third number: "))
 greater = a>b and a>c
 #Output
 print("Check if first is greater than both second and third:",greater)
+
+#Problem 3: Take your name and age as input and print in format:
+'''Hello Hamza,
+You are 22 years old'''
+#Take name & age as input
+name = input("Enter your good name: ")
+age = input("Enter your age: ")
+#Output
+print(f"Hello {name},\nYou are {age} years old")
