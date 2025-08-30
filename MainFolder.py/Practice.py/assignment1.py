@@ -38,3 +38,11 @@ mark2 = int(input("Enter your second marks: "))
 greater = mark1>40 and mark2>40
 #Output
 print("True if both are greater than 40, else False.\nResult =",greater)
+
+#Problem 5: Take radius input and print area of circle using formatted string. formula: π r²  
+#Take radius input
+r = float(input("Enter radius of circle: "))
+#formula for radius calculation
+area = 3.14 * r**2
+#Output
+print(f"Area of circle is {area}")
