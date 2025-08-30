@@ -10,3 +10,13 @@ multiply = add * 2
 subtract = multiply - 5 
 #Output
 print("Result =",subtract)
+
+#Problem 2: Take 3 numbers and check if first is greater than both second and third.
+#Take input of 3 numbers
+a = int(input("Enter first number: "))
+b = int(input("Enter second number: "))
+c = int(input("Enter third number: "))
+#Check
+greater = a>b and a>c
+#Output
+print("Check if first is greater than both second and third:",greater)
