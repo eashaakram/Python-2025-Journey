@@ -29,3 +29,12 @@ name = input("Enter your good name: ")
 age = input("Enter your age: ")
 #Output
 print(f"Hello {name},\nYou are {age} years old")
+
+#Problem 4: Take 2 marks as input, print True if both are greater than 40, else False.
+#Take 2 marks as input
+mark1 = int(input("Enter your first marks: "))
+mark2 = int(input("Enter your second marks: "))
+#Check
+greater = mark1>40 and mark2>40
+#Output
+print("True if both are greater than 40, else False.\nResult =",greater)
