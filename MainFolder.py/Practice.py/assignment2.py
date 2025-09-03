@@ -20,7 +20,25 @@ if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
 else:
   print(f"No, {year} is not a leap year!")
 
-#
+'''Poblem 3: Take electricity units and calculate bill:
+(units) 1–100 →  (Rs.) 10 per unit
+(units) 101–200 →   (rRs.) 15 per unit
+(units) above 200 →(  Rs.)  20 per unit'''
+#Take units as input
+unit = int(input("Enter electricity units:"))
+#Calculate
+while unit < 1:
+  unit = int(input("Invalid input.\nPlease enter positive number start from One!"))
+if unit >=1 and unit <= 100:
+  bill = unit * 10
+  print(f"Price of one unit is 10\nThe bill is: {bill} PKR")
+elif unit >= 101 and unit <= 200:
+  bill = unit * 15
+  print(f"Price of one unit is 15\nThe bill is: {bill} PKR")
+else:
+  bill = unit * 20
+  print(f"Price of one unit is 20\nThe bill is: {bill} PKR")
+
 
 '''Problem 5: Take a number from the user as input and check whether the number is positive, negative, or zero.
 If the number is positive:
