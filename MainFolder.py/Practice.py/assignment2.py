@@ -39,6 +39,15 @@ else:
   bill = unit * 20
   print(f"Price of one unit is 20\nThe bill is: {bill} PKR")
 
+#Problem 4: Take a string from the user, then check whether the user actually entered something or left it blank.
+#Take string input
+text = input("Enter Anything: ")
+#Check
+if text == "":
+  print("You did't enter anything!")
+else:
+  print(f"You entered: {text}")
+
 
 '''Problem 5: Take a number from the user as input and check whether the number is positive, negative, or zero.
 If the number is positive:
