@@ -11,6 +11,15 @@ elif num2 < num1 and num2 < num3:
 else:
   print(f"Third number {num3} is smallest number")
 
+#Problem 2: Take the year as input (e.g: 2025) and check whether the year is leap or not
+#Take year as input
+year = int(input("Enter any year: "))
+#Check if year is leap or not
+if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+  print(f"Yes, {year} is a leap year!")
+else:
+  print(f"No, {year} is not a leap year!")
+
 #
 
 '''Problem 5: Take a number from the user as input and check whether the number is positive, negative, or zero.
