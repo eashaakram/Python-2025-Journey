@@ -5,5 +5,7 @@ print("Guess Any Number")
 guess = int(input("Enter number: "))
 if guess == secret:
     print("You are right.\nCongratulation, You won!!")
-else:
-    print("You are wrong.\nSorry, You loss!!")
+elif guess < secret:
+    print("Too low! Try a bigger number.")
+else:    
+    print("Too high! Try a smaller number.")
