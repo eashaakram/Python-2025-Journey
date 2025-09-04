@@ -17,10 +17,14 @@ if amount >= 1000:
         discount = amount * 0.2
         new_amount = amount - discount
         print(f"New amount is {new_amount}")
-    else:
+    elif customer_type == 'n':
         print("You will get 10% discount")
         discount = amount * 0.1
         new_amount = amount - discount
         print(f"New amount is {new_amount}")
+    else:
+        print("Invalid Answer! Please type y for yes & n for no")
 else:
     print("No discount for you.\nSpent atleast 1000 rupees to get a discount")
+
+print(">>> Thank You <<<")
