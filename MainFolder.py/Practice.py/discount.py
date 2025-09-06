@@ -7,7 +7,7 @@ Then ask if they are a first-time customer (yes or no)
 If they are a first-time customer, they get 20% discount If not, they get 10% discount
 If the amount is less than 1000, print: "No discount. Spend at least 1000 to get a discount“
 '''
-print(">>>> Online Shopping Discount Checker <<<<")
+print("\t>>> Online Shopping Discount Checker <<<<")
 amount = int(input("Enter your total amount: "))
 if amount >= 1000:
     print("You'r qualified for discount!")
