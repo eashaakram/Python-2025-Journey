@@ -43,11 +43,14 @@ else:
 #Take string input
 text = input("Enter Anything: ")
 #Check
-if text == "":
-  print("You did't enter anything!")
-else:
+# if text == "":
+#   print("You did't enter anything!")
+# else:
+#   print(f"You entered: {text}")
+if text:
   print(f"You entered: {text}")
-
+else:
+  print("You did't enter anything!")
 
 '''Problem 5: Take a number from the user as input and check whether the number is positive, negative, or zero.
 If the number is positive:
