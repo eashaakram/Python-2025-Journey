@@ -51,3 +51,16 @@ else:
 '''Problem 3: Take a number n from the user as input and
  print the sum of even numbers and sum of odd numbers from 1 to n.
 '''
+#Take input
+num = int(input("Enter a number: "))
+sum_even = 0
+sum_odd = 0
+#Loop from 1 to n 
+for i in range(1,num+1):
+  if i % 2 == 0:
+    sum_even += i #Even number
+  else:
+    sum_odd += i #Odd number
+#Display Total
+print(f"Sum of even numbers from 1 to {i} is {sum_even}")
+print(f"Sum of odd numbers from 1 to {i} is {sum_odd}")
