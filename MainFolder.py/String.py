@@ -49,3 +49,16 @@
 print("a" in "Easha") #True
 print("k" in "Easha") #False
 print("k" not in "Easha") #True
+
+a = "i"
+print(a*5)
+
+country = "Pakistan"
+print("Last character:",country[-1])
+start = 0
+while(start <= len(country)-1):
+    print(country[start],end="")
+    start+=1
+#another method of for loop
+for i in country:
+    print(i)
