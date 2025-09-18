@@ -34,3 +34,20 @@ except Exception as e:
     print(e)
 print("Some code of lines")
 print("End of program")
+
+#finally clause
+def func1():
+    try:
+        l = [1,5,6,7]
+        i = int(input("Enter the index:"))
+        print(l[i])
+        return 1
+    except:
+        print("Some erroe occured")
+        return 0
+    finally: #it is always executed
+        print("I am always executed")
+
+
+x = func1()
+print(x)
