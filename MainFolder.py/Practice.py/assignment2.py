@@ -146,3 +146,22 @@ match choice:
         normal_lang = input("Enter you word to convert: ")
         decode(normal_lang)
 
+
+
+# n=input(' Do you want to do coding or decoding:  ')
+# if n=='coding':
+# 	n1=input('Enter a message to code:  ')
+# 	n2=n1.split()
+# 	for i in n2:
+# 	 if len(i)<=3:
+# 	 	print(i[::-1],end=' ')
+# 	 else:
+# 	 	print('ght'+i[1:]+i[0]+'jik',end=' ')
+# else:
+# 	 n1=input('Enter a code to decode')
+# 	 n2=n1.split()
+# 	 for i in n2:
+# 	 	if len(i)<=3:
+# 	 		print(i[::-1],end=' ')
+# 	 	else:
+# 	 		print(i[-4]+i[3:-4],end=' ')
