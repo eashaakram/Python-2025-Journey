@@ -64,3 +64,7 @@ print("Old list:",list)
 list1 = ["welcome!"]
 list.append(list1)
 print("updated list:",list)
+
+list = ['h','i','h','o','w','y','o','u','!','!']
+print("The count of i is: ",list.count('i'))
+print("The count of o is: ",list.count('o'))
