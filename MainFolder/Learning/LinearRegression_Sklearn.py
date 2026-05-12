@@ -38,3 +38,7 @@
 # print("Slope (m):", model.coef_[0])
 
 # print("Intercept (c):", model.intercept_)
+
+import matplotlib as plt
+import numpy as np
+from sklearn import datasets
