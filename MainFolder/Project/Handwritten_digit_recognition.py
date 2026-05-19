@@ -5,7 +5,7 @@ import cv2
 from keras.models import load_model
 from pygame.locals import *
 
-# ---------------- SETTINGS ----------------
+#  SETTINGS 
 WINDOWSIZEX = 640
 WINDOWSIZEY = 480
 
@@ -15,6 +15,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 
+#this step is optional as it is false so still it is not saving pictures
 IMAGESAVE = False  # set True if you want to save drawings
 
 MODEL = load_model("bestmodel.h5")
@@ -27,22 +28,25 @@ LABELS = {
     8: "Eight", 9: "Nine"
 }
 
-# ---------------- INIT ----------------
+#  INIT 
 pygame.init()
 
-FONT = pygame.font.Font("freesansbold.ttf", 18)
+FONT = pygame.font.Font("freesansbold.ttf", 18) #font setup
 
-DISPLAYSURF = pygame.display.set_mode((WINDOWSIZEX, WINDOWSIZEY))
-pygame.display.set_caption("Digit Board")
+DISPLAYSURF = pygame.display.set_mode((WINDOWSIZEX, WINDOWSIZEY)) 
+pygame.display.set_caption("Digit Board") #it will show on top
 
+#drawing status off for now
 iswriting = False
 
+#to store mouse coordinates in list
 number_xcord = []
 number_ycord = []
 
+#to save images name like image_0.png but if IMAGESAVE = True
 image_cnt = 0
 
-# ---------------- MAIN LOOP ----------------
+#  MAIN LOOP 
 while True:
 
     for event in pygame.event.get():
@@ -76,16 +80,14 @@ while True:
 
                 # extract screen area
                 img_arr = np.array(pygame.PixelArray(DISPLAYSURF))[
-                    rect_min_x:rect_max_x,
-                    rect_min_y:rect_max_y
-                ].T.astype(np.float32)
+                    rect_min_x:rect_max_x,rect_min_y:rect_max_y].T.astype(np.float32)
 
-                # optional save
+                # optional save if we want to create handwritten dataset in future then its useful
                 if IMAGESAVE:
                     cv2.imwrite(f"image_{image_cnt}.png", img_arr)
                     image_cnt += 1
 
-                # ---------------- PREDICTION ----------------
+                # PREDICTION 
                 try:
                     image = cv2.resize(img_arr, (28, 28))
                     image = np.pad(image, ((10, 10), (10, 10)), 'constant', constant_values=0)
@@ -114,7 +116,7 @@ while True:
 
         # clear screen
         if event.type == KEYDOWN:
-            if event.unicode == "n":
+            if event.unicode == "n": #if n press then clear board
                 DISPLAYSURF.fill(BLACK)
 
     pygame.display.update()
