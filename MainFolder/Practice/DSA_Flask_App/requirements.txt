@@ -1,0 +1,31 @@
+### 3. Streamlit Cloud se Connect Karein
+Ab niche diye gaye steps follow karein:
+
+<Steps>
+{/* Reason: Order is critical for successful deployment on the cloud platform. */}
+  <Step title="Sign In to Streamlit Cloud" subtitle="Requires GitHub Account">
+    [share.streamlit.io](https://share.streamlit.io/) par jayein aur apne GitHub account se login karein.
+  </Step>
+  <Step title="Connect Repository" subtitle="Select your project">
+    **"New app"** button par click karein. Phir apni GitHub repository select karein jisme aapka DSA Visualizer ka code pada hai.
+  </Step>
+  <Step title="Set Main File" subtitle="Usually app.py">
+    "Main file path" mein apni main file ka naam likhein (e.g., `app.py`).
+  </Step>
+  <Step title="Deploy & Share" subtitle="Get your link">
+    **"Deploy!"** par click karein. 2-3 minute mein aapki app live ho jayegi aur aapko upar browser mein ek unique link mil jayega (jaise: `dsa-visualizer.streamlit.app`).
+  </Step>
+</Steps>
+
+---
+
+### Summary Table: Deployment Essentials
+| Requirement | Purpose |
+| :--- | :--- |
+| **GitHub Account** | Code hosting aur version control ke liye |
+| **requirements.txt** | Server ko batane ke liye ke kaunsi libraries install karni hain |
+| **Main File** | App ka starting point (Aapka `app.py`) |
+
+> **Note:** Jab bhi aap apne computer par code change karke GitHub par "Push" (upload) karenge, aapka online link **automatic update** ho jayega. Aapko baar baar deploy karne ki zaroorat nahi padegi.
+
+<FollowUp label="Kya aap chahte hain main GitHub par code upload karne ka step-by-step process samjhaun?" query="How to upload a local project to GitHub using Git commands or GitHub Desktop for Streamlit deployment?"/>
