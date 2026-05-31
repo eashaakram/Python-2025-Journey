@@ -11,6 +11,18 @@ import seaborn as sns
 # Load dataset
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 print("Dataset Loaded Successfully!")
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 4))
+
+for i in range(10):
+    plt.subplot(2, 5, i + 1)
+    plt.imshow(x_train[i], cmap='gray')
+    plt.title(y_train[i])
+    plt.axis('off')
+
+plt.tight_layout()
+plt.show()
 
 # Normalize
 x_train = x_train / 255.0
