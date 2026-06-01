@@ -5,7 +5,7 @@ from my_pages.utils import home_button
 
 st.markdown("---")
 # =========================================
-# COLORS (same modern theme as BST)
+# COLORS 
 # =========================================
 BG = "#121826"
 NODE = "#1F2A44"
