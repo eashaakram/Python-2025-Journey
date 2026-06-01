@@ -116,7 +116,7 @@ def show_binary_search():
                     st.info(f"Comparing {arr[mid]} with {target}")
                     st.write(f"Comparisons: {comparisons}")
 
-                    # 🔥 EXPLANATION PANEL (IMPORTANT IMPROVEMENT)
+                    # 🔥 EXPLANATION PANEL 
                     if arr[mid] > target:
                         st.warning("Target is smaller → moving LEFT half")
                     elif arr[mid] < target:
