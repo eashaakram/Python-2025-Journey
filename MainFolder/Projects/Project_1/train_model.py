@@ -63,33 +63,32 @@ print(f"Test Accuracy : {accuracy * 100:.2f}%")
 print(f"Test Loss     : {loss:.4f}")
 print("==============================")
 
-# Accuracy & Loss Graphs
-plt.figure(figsize=(12, 5))
-
-
-# Accuracy & Loss Graphs
-plt.figure(figsize=(12, 5))
-
 # Accuracy Graph
-plt.subplot(1, 2, 1)
-plt.plot(history.history['accuracy'], label='Training Accuracy')
-plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
-plt.title('Accuracy Graph')
-plt.xlabel('Epoch')
-plt.ylabel('Accuracy')
-plt.legend()
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+epochs_ran = range(1, len(history.history['accuracy']) + 1)
 
-# Loss Graph
-plt.subplot(1, 2, 2)
-plt.plot(history.history['loss'], label='Training Loss')
-plt.plot(history.history['val_loss'], label='Validation Loss')
-plt.title('Loss Graph')
-plt.xlabel('Epoch')
-plt.ylabel('Loss')
-plt.legend()
+# Accuracy curve 
+axes[0].plot(epochs_ran, history.history['accuracy'], 'b-o', markersize=4, label='Training accuracy')
+axes[0].plot(epochs_ran, history.history['val_accuracy'], 'r-o', markersize=4, label='Validation accuracy')
+axes[0].set_title('Model Accuracy over Epochs', fontweight='bold')
+axes[0].set_xlabel('Epoch')
+axes[0].set_ylabel('Accuracy')
+axes[0].legend()
+axes[0].grid(alpha=0.3)
 
+# Loss curve 
+axes[1].plot(epochs_ran, history.history['loss'], 'b-o', markersize=4, label='Training loss')
+axes[1].plot(epochs_ran, history.history['val_loss'], 'r-o', markersize=4, label='Validation loss')
+axes[1].set_title('Model Loss over Epochs', fontweight='bold')
+axes[1].set_xlabel('Epoch')
+axes[1].set_ylabel('Loss')
+axes[1].legend()
+axes[1].grid(alpha=0.3)
+
+plt.suptitle('Training vs Validation Performance', fontsize=14, fontweight='bold')
 plt.tight_layout()
 plt.show()
+
 
 # Predictions
 y_pred = model.predict(x_test, verbose=0)
@@ -99,20 +98,16 @@ y_true = y_test
 
 # Confusion Matrix
 cm = confusion_matrix(y_true, y_pred_classes)
-
-plt.figure(figsize=(8, 6))
-
+plt.figure(figsize=(10, 8))
 sns.heatmap(
     cm,
-    annot=True,
-    fmt='d',
-    cmap='Blues'
+    annot=True, fmt='d', cmap='Blues',
+    xticklabels=range(10), yticklabels=range(10)
 )
-
-plt.title("Confusion Matrix")
-plt.xlabel("Predicted Label")
-plt.ylabel("Actual Label")
-
+plt.title('Confusion Matrix — Handwritten Digit Recognition', fontweight='bold', fontsize=13)
+plt.xlabel('Predicted Label', fontsize=11)
+plt.ylabel('Actual Label', fontsize=11)
+plt.tight_layout()
 plt.show()
 
 # Classification Report
