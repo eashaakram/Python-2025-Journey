@@ -1,137 +1,312 @@
 import streamlit as st
 import json
 import os
+import re
 
-def show_login():
-    # Hide unwanted lines and inject professional styling
-    st.html(
-        """
-        <style>
-            hr { display: none !important; }
-            /* Global font and input styling */
-            div.stTextInput > label {
-                font-weight: 500 !important;
-                color: #FFFFFF !important;
-            }
-            div.stTextInput > div > div > input {
-                background-color: #F0F8FF !important; /* Light background like the image */
-                color: #000000 !important;
-                border: 1px solid #2d2d2d !important;
-                border-radius: 12px !important;
-                padding: 12px !important;
-            }
-            /* Button Styling */
-            div.stButton > button {
-                background-color: #1E1E1E !important;
-                color: #FFFFFF !important;
-                border: 1px solid #00BFFF !important;
-                border-radius: 10px !important;
-                height: 50px !important;
-                font-weight: 600 !important;
-                transition: all 0.3s ease !important;
-            }
-            div.stButton > button:hover {
-                background-color: #00BFFF !important;
-                color: #000000 !important;
-            }
-            
-            /* Fix layout overlap when using collapsed label visibility */
-            div.stTextInput {
-                margin-top: 25px !important;
-                margin-bottom: 5px !important;
-            }
-        </style>
-        """
-    )
-    
-    # Glow Profile Logo 
+# Step 1: Add a professional header & footer, matching https://data-structure-and-algorithms.vercel.app/ style.
+def app_header():
     st.markdown(
         """
-        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-            <div style="background: linear-gradient(135deg, #00BFFF, #1E90FF); 
-                        width: 100px; height: 100px; border-radius: 50%; 
-                        display: flex; justify-content: center; align-items: center;
-                        box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);">
-                <svg width="50" height="50" viewBox="0 0 24 24" fill="white">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                </svg>
-            </div>
-        </div>
-        """, unsafe_allow_html=True
+        <header style="
+            width:100vw;
+            min-width:320px;
+            background: linear-gradient(90deg, #001B2E 0%, #1679AB 80%);
+            padding: 28px 0 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0px 2px 20px #10365277;">
+            <h1 style="
+                color: #fff;
+                font-weight: 900;
+                margin: 0;
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+                text-shadow: 0 1px 6px #143d5a60;
+                font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            ">
+                DSA VISUALIZER
+            </h1>
+            <nav style="margin-top: 8px;">
+                <a style="color:#ACD2FA; text-decoration:none; margin:0 14px; font-weight:600;" href="/">Home</a>
+                <a style="color:#ACD2FA; text-decoration:none; margin:0 14px; font-weight:600;" href="?page=login">Login</a>
+                <a style="color:#ACD2FA; text-decoration:none; margin:0 14px; font-weight:600;" href="?page=auth&auth_page=signup">Sign Up</a>
+            </nav>
+        </header>
+        """,
+        unsafe_allow_html=True
     )
-    
-    st.markdown("<h2 style='text-align:center; color:#FFFFFF; margin-bottom:0;'>Welcome Back</h2>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align:center; color:#888888; margin-bottom:30px;'>Sign in to continue learning</p>", unsafe_allow_html=True)
-    
-    # Centered Container
-    col_l, col_mid, col_r = st.columns([1, 2.5, 1])
-    
-    with col_mid:
-        # Email Input with Icon 
-        st.markdown(
-            '<div style="display: flex; align-items: center; margin-bottom: -20px; position: relative; z-index: 99;">'
-            '<svg width="20" height="20" viewBox="0 0 24 24" fill="#00BFFF" style="margin-right:10px;"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>'
-            '<span style="color:white; font-size:14px; font-weight: 500;">Email Address</span>'
-            '</div>', unsafe_allow_html=True
-        )
-        login_identity = st.text_input("", placeholder="easha@dsa.com", key="email_val", label_visibility="collapsed")
 
-        # Password Input with Icon - Fixed spacing
-        st.markdown(
-            '<div style="display: flex; align-items: center; margin-bottom: -20px; margin-top:15px; position: relative; z-index: 99;">'
-            '<svg width="20" height="20" viewBox="0 0 24 24" fill="#00BFFF" style="margin-right:10px;"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>'
-            '<span style="color:white; font-size:14px; font-weight: 500;">Password</span>'
-            '</div>', unsafe_allow_html=True
-        )
-        login_password = st.text_input("", type="password", placeholder="•••••", key="pass_val", label_visibility="collapsed")
+def app_footer():
+    st.markdown(
+        """
+        <footer style="width:100vw; min-width:320px; text-align:center; margin-top: 40px; padding: 22px 0 10px 0; background: #001B2E; color: #d5eaff; font-size: 15px; border-top: 1px solid #143d5af5;">
+            <span style="font-weight: 500">© 2024 DSA Visualizer</span>
+            <span style="margin-left: 8px; color: #1679AB;">by Data Structure & Algorithms</span>
+        </footer>
+        """,
+        unsafe_allow_html=True
+    )
 
-        st.markdown("<div style='margin-bottom: 25px;'></div>", unsafe_allow_html=True)
+def is_valid_email(email):
+    # Simple regex to check email validity (RFC 5322 simplified)
+    return re.fullmatch(r"[^@\s]+@[^@\s]+\.[a-zA-Z0-9]{2,}$", email or "")
 
-        # Login Button
-        if st.button("Login", use_container_width=True):
-            if not login_identity.strip() or not login_password.strip():
-                st.error("Please enter both Email and Password!")
-            else:
-                file_path = "data/users.json"
-                user_authenticated = False
-                matched_user_name = ""
+def show_login():
+    app_header()
 
-                # JSON file se users check karne ka logic
-                if os.path.exists(file_path):
-                    with open(file_path, "r") as file:
-                        try:
-                            users = json.load(file)
-                            if isinstance(users, dict):
-                                users = [users]
-                        except:
-                            users = []
-                    
-                    # Email aur password check karein
-                    for user in users:
-                        if user.get("email", "").strip().lower() == login_identity.strip().lower() and user.get("password", "") == login_password:
-                            user_authenticated = True
-                            matched_user_name = user.get("full_name", "User")
-                            break
-                
-                if user_authenticated:
-                    st.success(f"Welcome back, {matched_user_name}!")
-                    st.session_state.page = "home"
-                    st.rerun()
-                else:
-                    st.error("Invalid Email or Password! Please create an account first.")
+    # Step 2: Inject global/professional and mobile-centered CSS matching the reference and mobile
+    st.markdown(
+        """
+        <style>
+        html, body, .stApp {
+            background: #051C31 !important;
+        }
+        .centered-card {
+            max-width: 410px;
+            min-width: 295px;
+            margin: 32px auto 0 auto;
+            box-shadow: 0 2px 16px #143d5a38;
+            background: #0F2A43;
+            border-radius: 18px;
+            padding: 42px 26px 26px 26px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        @media (max-width: 600px) {
+            .centered-card {
+                max-width: 100vw;
+                border-radius: 0;
+                padding: 34px 7vw 21px 7vw;
+            }
+        }
+        .dsa-label {
+            font-weight: 600;
+            color: #A5D8FF !important;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            margin-left: 2px;
+        }
+        .dsa-input input {
+            background: #F0F8FF !important;
+            color: #0F283E !important;
+            border: 1.5px solid #92BCE3 !important;
+            border-radius: 9px !important;
+            padding: 13px 13px !important;
+            font-size: 16px;
+            margin-top: 2px !important;
+        }
+        .dsa-btn button {
+            background: linear-gradient(90deg,#1679AB 65%,#69C3FA 135%) !important;
+            color: #fff !important;
+            border: none !important;
+            border-radius: 9px !important;
+            font-weight: 700 !important;
+            letter-spacing: 1px;
+            font-size: 17px !important;
+            padding: 13px 0 !important;
+            transition: filter .18s;
+            margin-top: 8px;
+        }
+        .dsa-btn button:disabled {
+            background: #badcf7 !important;
+            color: #5075a1 !important;
+            cursor: not-allowed;
+            filter: grayscale(0.4);
+        }
+        .dsa-btn button:hover:enabled {
+            filter: brightness(1.09);
+        }
+        .dsa-error {
+            color: #FFA5A5 !important;
+            background: #38233644 !important;
+            font-weight: 500;
+            margin-top: 2px;
+            margin-bottom: 0;
+            font-size: 13px;
+            padding: 2px 0 0 5px;
+        }
+        .dsa-linkbar {
+            display: flex; gap:16px; justify-content: center; align-items: center; margin: 15px 0 0 0;
+        }
+        .dsa-linkbar a {
+            color: #96C7F8;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: text-decoration-color .2s;
+            padding: 0 2px;
+        }
+        .dsa-linkbar a:hover { text-decoration: underline; text-decoration-color: #379EFF;}
+        .dsa-center-logo {
+            margin-bottom: 18px;
+            display:block;
+            width:90px; height:90px;
+            margin-left: auto; margin-right: auto;
+            background:linear-gradient(135deg, #00BFFF 30%, #1E90FF 85%);
+            border-radius:50%; box-shadow: 0 0 13px #52bfff66;
+            display:flex; align-items:center; justify-content:center;
+        }
+        .dsa-page-h1 {
+            text-align:center; color:#FBFCFF; font-size:1.8rem; font-weight: 800;
+            margin: 10px 0 2px 0; font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+        }
+        .dsa-page-desc {
+            text-align:center; color:#BBD6EF; margin-bottom:23px; font-size:15px; font-weight:500;
+        }
+        .dsa-divider {
+            border-top: 1.5px solid #325179; margin: 26px 0 15px 0;
+            width: 100%; display: block;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
-        # Demo Login with Lightning Icon (image_0acc0c.png reference)
-        demo_btn_label = "⚡ Demo Login"
-        if st.button(demo_btn_label, use_container_width=True):
+    # Step 3: Centered card for login form
+    st.markdown('<div class="centered-card">', unsafe_allow_html=True)
+    # Logo
+    st.markdown("""
+    <div class="dsa-center-logo">
+        <svg width="55" height="55" viewBox="0 0 24 24" fill="white">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+    </div>
+    """, unsafe_allow_html=True)
+    # Header
+    st.markdown('<div class="dsa-page-h1">Welcome Back</div>', unsafe_allow_html=True)
+    st.markdown('<div class="dsa-page-desc">Sign in to continue learning</div>', unsafe_allow_html=True)
+
+    # Step 4: Real-time validation logic
+    if "login_email_val" not in st.session_state: st.session_state.login_email_val = ""
+    if "login_pass_val" not in st.session_state: st.session_state.login_pass_val = ""
+    if "login_email_err" not in st.session_state: st.session_state.login_email_err = ""
+    if "login_pass_err" not in st.session_state: st.session_state.login_pass_err = ""
+
+    # -- Handle input changes (simulate "real-time" on user typing)
+    def on_email_change():
+        email = st.session_state.login_email_val
+        if not email:
+            st.session_state.login_email_err = "Email Address required"
+        elif not is_valid_email(email):
+            st.session_state.login_email_err = "Please enter a valid email"
+        else:
+            st.session_state.login_email_err = ""
+
+    def on_pass_change():
+        value = st.session_state.login_pass_val
+        if not value:
+            st.session_state.login_pass_err = "Password required"
+        elif len(value) < 5:
+            st.session_state.login_pass_err = "Password too short"
+        else:
+            st.session_state.login_pass_err = ""
+
+    # Email Input
+    st.markdown('<span class="dsa-label">Email Address</span>', unsafe_allow_html=True)
+    st.text_input(
+        label="Email",
+        value=st.session_state.login_email_val,
+        key="login_email_val",
+        placeholder="easha@dsa.com",
+        label_visibility="collapsed",
+        on_change=on_email_change,
+        help=None,
+        disabled=False,
+        args=None,
+        kwargs=None,
+        # custom class for targeting input styling
+    )
+    if st.session_state.login_email_err:
+        st.markdown(f'<div class="dsa-error">{st.session_state.login_email_err}</div>', unsafe_allow_html=True)
+    else:
+        st.markdown("<div style='height:18px;'></div>", unsafe_allow_html=True)
+
+    # Password Input
+    st.markdown('<span class="dsa-label">Password</span>', unsafe_allow_html=True)
+    st.text_input(
+        label="Password",
+        value=st.session_state.login_pass_val,
+        key="login_pass_val",
+        placeholder="•••••••",
+        type="password",
+        label_visibility="collapsed",
+        on_change=on_pass_change,
+        args=None,
+        kwargs=None,
+    )
+    if st.session_state.login_pass_err:
+        st.markdown(f'<div class="dsa-error">{st.session_state.login_pass_err}</div>', unsafe_allow_html=True)
+    else:
+        st.markdown("<div style='height:18px;'></div>", unsafe_allow_html=True)
+
+    # Step 5: Buttons (Login, demo, nav links) styled in a consistent manner; disable login if not valid.
+    form_valid = not st.session_state.login_email_err and not st.session_state.login_pass_err \
+        and st.session_state.login_email_val.strip() and st.session_state.login_pass_val.strip()
+
+    st.markdown('<div class="dsa-btn">', unsafe_allow_html=True)
+    login_clicked = st.button("Login", use_container_width=True, disabled=not form_valid)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # Demo login always enabled
+    st.markdown('<div class="dsa-btn">', unsafe_allow_html=True)
+    demo_clicked = st.button("⚡ Demo Login", use_container_width=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # Feedback messages (for login only)
+    if login_clicked:
+        login_identity = st.session_state.login_email_val
+        login_password = st.session_state.login_pass_val
+
+        file_path = "data/users.json"
+        user_authenticated = False
+        matched_user_name = ""
+
+        if os.path.exists(file_path):
+            with open(file_path, "r") as file:
+                try:
+                    users = json.load(file)
+                    if isinstance(users, dict):
+                        users = [users]
+                except:
+                    users = []
+            for user in users:
+                if user.get("email", "").strip().lower() == login_identity.strip().lower() and user.get("password", "") == login_password:
+                    user_authenticated = True
+                    matched_user_name = user.get("full_name", "User")
+                    break
+
+        if user_authenticated:
+            st.success(f"Welcome back, {matched_user_name}!")
             st.session_state.page = "home"
             st.rerun()
-        
-        st.markdown("<p style='text-align:center; color:#666666; font-size:12px; margin-top:-10px;'>Use demo mode instantly (no signup required)</p>", unsafe_allow_html=True)
-        
-        # Divider and Signup
-        st.markdown("<div style='border-top: 1px solid #333; margin: 20px 0; position: relative;'><span style='position: absolute; top: -10px; left: 30%; background: #0e1117; padding: 0 10px; color: #555; font-size: 12px;'>Don't have an account?</span></div>", unsafe_allow_html=True)
-        
-        if st.button("👤+ Create New Account", use_container_width=True):
-            st.session_state.page = "auth"
-            st.session_state.auth_page = "signup"
-            st.rerun()
+        else:
+            st.error("Invalid Email or Password! Please create an account first.")
+
+    if demo_clicked:
+        st.session_state.page = "home"
+        st.rerun()
+
+    # Demo info
+    st.markdown('<div style="text-align:center; color:#A0BBCC; font-size:13px; margin:6px 0 6px 0;">Use demo mode instantly (no signup required)</div>', unsafe_allow_html=True)
+
+    # Divider
+    st.markdown('<div class="dsa-divider"></div>', unsafe_allow_html=True)
+
+    # Navigation Links (Signup and Login, always consistent)
+    st.markdown(
+        """
+        <div class="dsa-linkbar">
+            <span style="color:#A2B3BB;">New here?</span>
+            <a href="?page=auth&auth_page=signup">Create Account</a>
+            <span style="color:#2e4360;">·</span>
+            <a href="?page=login">Login</a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown("</div>", unsafe_allow_html=True)  # Close centered-card
+
+    app_footer()
