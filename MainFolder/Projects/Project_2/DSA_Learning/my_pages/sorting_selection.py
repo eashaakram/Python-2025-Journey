@@ -1,199 +1,116 @@
 import streamlit as st
 import time
-
 from my_pages.utils import home_button
 
-st.markdown("---")
+# -----------------------------
+# COLORS (Bubble Sort jaisa same)
+# -----------------------------
+BOX = "#2C3E50"      # Base Color
+HIGHLIGHT = "#F39C12" # Active Element / Min
+SORTED = "#27AE60"    # Sorted Portion
 
-# -----------------------------
-# COLORS (PROFESSIONAL)
-# -----------------------------
-BOX = "#2C3E50"
-MIN_COLOR = "#F39C12"
-COMPARE = "#5DADE2"
-SORTED = "#27AE60"
-
-
-# -----------------------------
-# DRAW ARRAY
-# -----------------------------
 def draw_bars(arr, min_idx=None, compare_idx=None, sorted_upto=0):
-
     cols = st.columns(len(arr))
-
     for i, val in enumerate(arr):
-
-        color = BOX
-
-        if i < sorted_upto:
-            color = SORTED
-
-        if i == min_idx:
-            color = MIN_COLOR
-
-        if i == compare_idx:
-            color = COMPARE
-
+        # Color Logic
+        if i < sorted_upto: color = SORTED
+        elif i == min_idx or i == compare_idx: color = HIGHLIGHT
+        else: color = BOX
+        
         with cols[i]:
-            st.markdown(
-                f"""
-                <div style="
-                    height:80px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    background-color:{color};
-                    color:white;
-                    border-radius:10px;
-                    font-size:18px;
-                    font-weight:600;
-                    box-shadow:0px 4px 8px rgba(0,0,0,0.3);
-                ">
-                    {val}
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+            st.markdown(f"""
+            <div style="height:70px; display:flex; align-items:center; justify-content:center; 
+                        background-color:{color}; color:white; border-radius:10px; 
+                        font-size:18px; font-weight:600; box-shadow:0px 4px 8px rgba(0,0,0,0.3);">
+                {val}
+            </div>""", unsafe_allow_html=True)
+            st.caption(f"[{i}]")
 
-
-# -----------------------------
-# MAIN FUNCTION
-# -----------------------------
 def show_sorting_selection():
     home_button()
     st.title("Selection Sort Visualizer 🎯")
 
-    # INIT
-    if "arr" not in st.session_state:
+    # State Init
+    if "arr" not in st.session_state: st.session_state.arr = [42, 17, 33, 8, 29]
+    if "i" not in st.session_state: st.session_state.i = 0
+    if "j" not in st.session_state: st.session_state.j = 1
+    if "min_idx" not in st.session_state: st.session_state.min_idx = 0
+    if "swaps" not in st.session_state: st.session_state.swaps = 0
+    if "running" not in st.session_state: st.session_state.running = False
+
+    # ---------------- CUSTOM INPUT ----------------
+    st.subheader("Custom Array Input")
+    user_input = st.text_input("Enter numbers (comma separated)", "42,17,33,8,29")
+    colA, colB = st.columns([1, 4])
+    if colA.button("Apply"):
+        st.session_state.arr = list(map(int, user_input.split(",")))
+        st.session_state.i, st.session_state.j, st.session_state.min_idx, st.session_state.swaps = 0, 1, 0, 0
+        st.rerun()
+    if colB.button("Reset"):
         st.session_state.arr = [42, 17, 33, 8, 29]
-
-    if "i" not in st.session_state:
-        st.session_state.i = 0
-
-    if "j" not in st.session_state:
-        st.session_state.j = 1
-
-    if "min_idx" not in st.session_state:
-        st.session_state.min_idx = 0
-
-    if "running" not in st.session_state:
-        st.session_state.running = False
-
-    arr = st.session_state.arr
-    n = len(arr)
-
-    # ---------------- UI ----------------
-    draw_bars(
-        arr,
-        st.session_state.min_idx,
-        st.session_state.j,
-        st.session_state.i
-    )
+        st.session_state.i, st.session_state.j, st.session_state.min_idx, st.session_state.swaps = 0, 1, 0, 0
+        st.rerun()
 
     st.markdown("---")
 
-    speed = st.slider("Speed Control", 0.1, 1.5, 0.5)
+    col_code, col_vis = st.columns([1, 1.2])
 
-    col1, col2, col3 = st.columns(3)
+    with col_code:
+        st.subheader("Algorithm Code")
+        st.code("""
+void selectionSort(int arr[], int n) {
+    for(int i = 0; i < n - 1; i++) {
+        int minIdx = i;
+        for(int j = i + 1; j < n; j++) {
+            if(arr[j] < arr[minIdx]) minIdx = j;
+        }
+        // Swapping logic
+        swap(arr[i], arr[minIdx]);
+    }
+}""", language="cpp")
 
-    # PLAY / PAUSE
-    with col1:
-        if st.button("▶ Play / Pause"):
-            st.session_state.running = not st.session_state.running
+    with col_vis:
+        st.subheader("Visualizer")
+        speed = st.slider("Speed", 0.1, 1.5, 0.5)
+        st.markdown(f"**Total Swaps:** {st.session_state.swaps}")
+        
+        c1, c2, c3 = st.columns(3)
+        if c1.button("▶ Play"): st.session_state.running = True
+        if c2.button("⏸ Pause"): st.session_state.running = False
+        if c3.button("Step"): selection_step(); st.rerun()
 
-    # STEP
-    with col2:
-        if st.button("Step-by-Step"):
-            selection_step()
-            st.rerun()
+        draw_bars(st.session_state.arr, st.session_state.min_idx, st.session_state.j, st.session_state.i)
 
-    # RESET
-    with col3:
-        if st.button("🔄 Reset"):
-            st.session_state.arr = [42, 17, 33, 8, 29]
-            st.session_state.i = 0
-            st.session_state.j = 1
-            st.session_state.min_idx = 0
-            st.session_state.running = False
-            st.rerun()
-
-    st.markdown("---")
-
-    # AUTO PLAY
     if st.session_state.running:
         selection_step()
         time.sleep(speed)
         st.rerun()
 
-    # CODE VIEW
-    with st.expander("View Code (C++)"):
-        st.code("""
-#include<iostream>
-using namespace std;
-void display(int arr[], int sz){
-	for (int i=0; i<sz; i++){
-		cout<<arr[i]<<" ";
-	}
-	cout<<endl;
-}
-void selectionsort(int arr[],int sz){
-	int swapping=0;
-	for(int i=0; i<sz-1; i++){
-		int minIndex=i;
-		for(int j=i+1; j<sz; j++){
-			if(arr[j]<arr[minIndex]){
-				minIndex=j;
-			}
-		}
-		if(minIndex!=i){
-			int temp=arr[i];
-			arr[i]=arr[minIndex];
-			arr[minIndex]=temp;
-			swapping++;
-		}
-	}
-
-	cout<<"Total Swap: "<<swapping<<endl;
-}
-int main(){
-	int size=6;
-	int arr[size]={9,3,1,6,2,4};
-	cout<<"Before Sort: ";
-	display(arr,size);
-	selectionsort(arr,size);
-		cout<<"After Sort: ";
-	display(arr,size);
-}
-        """, language="cpp")
-
-
-# -----------------------------
-# LOGIC ENGINE
-# -----------------------------
+# ---------------- EXPLANATION ----------------
+    st.markdown("---")
+    st.subheader("Understanding Selection Sort")
+    st.write("Selection Sort divides the list into a sorted and an unsorted part. It repeatedly selects the smallest element from the unsorted part and swaps it with the leftmost unsorted element.")
+    
+    st.markdown("### Complexity Analysis")
+    st.table({"Case": ["Best", "Average", "Worst"], "Complexity": ["O(n²)", "O(n²)", "O(n²)"]})
+    
 def selection_step():
-
     arr = st.session_state.arr
-    i = st.session_state.i
-    j = st.session_state.j
-    min_idx = st.session_state.min_idx
-
     n = len(arr)
-
-    if i < n:
-
-        if j < n:
-
-            if arr[j] < arr[min_idx]:
-                st.session_state.min_idx = j
-
+    if st.session_state.i < n - 1:
+        if st.session_state.j < n:
+            if arr[st.session_state.j] < arr[st.session_state.min_idx]:
+                st.session_state.min_idx = st.session_state.j
             st.session_state.j += 1
-
         else:
-            # swap minimum with current i
-            arr[i], arr[min_idx] = arr[min_idx], arr[i]
-
+            # Perform the SWAP
+            if st.session_state.min_idx != st.session_state.i:
+                arr[st.session_state.i], arr[st.session_state.min_idx] = arr[st.session_state.min_idx], arr[st.session_state.i]
+                st.session_state.swaps += 1
+            
             st.session_state.i += 1
-            st.session_state.j = st.session_state.i + 1
             st.session_state.min_idx = st.session_state.i
-
+            st.session_state.j = st.session_state.i + 1
+    else:
+        st.session_state.running = False
     st.session_state.arr = arr

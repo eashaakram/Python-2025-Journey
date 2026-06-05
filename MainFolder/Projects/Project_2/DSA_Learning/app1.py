@@ -163,6 +163,29 @@ def render_navbar_header():
     </div>
     """, unsafe_allow_html=True)
 
+def render_footer():
+    st.markdown("""
+    <style>
+    .footer {
+        position: relative;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #1a1c1e;
+        color: #8a929b;
+        text-align: center;
+        padding: 20px;
+        margin-top: 50px;
+        border-top: 1px solid #2d3139;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    </style>
+    <div class="footer">
+        Developed by Easha Akram | © 2026 DSA Learning Platform
+    </div>
+    """, unsafe_allow_html=True)
+
 def home():
     st.markdown('<div class="inner-app-layout">', unsafe_allow_html=True)
     
@@ -253,3 +276,7 @@ elif st.session_state.page == "avl": show_avl()
 else:
     st.session_state.page = "home"
     st.rerun()
+
+# Only show footer on pages that have the navbar
+if st.session_state.page not in ["welcome", "auth"]:
+    render_footer()

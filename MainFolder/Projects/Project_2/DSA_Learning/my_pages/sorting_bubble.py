@@ -1,200 +1,110 @@
 import streamlit as st
 import time
-
 from my_pages.utils import home_button
 
-st.markdown("---")
-
 # -----------------------------
-# PROFESSIONAL COLORS
+# CONSTANTS & STYLES
 # -----------------------------
-BG = "#1E1E2F"
 BOX = "#2C3E50"
 HIGHLIGHT = "#F39C12"
-SWAP = "#E74C3C"
 
-
-# -----------------------------
-# DRAW ARRAY
-# -----------------------------
 def draw_bars(arr, i=None, j=None):
-
     cols = st.columns(len(arr))
-
     for index, val in enumerate(arr):
-
-        color = BOX
-
-        if index == i or index == j:
-            color = HIGHLIGHT
-
+        color = HIGHLIGHT if index == i or index == j else BOX
         with cols[index]:
-            st.markdown(
-                f"""
-                <div style="
-                    height:80px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    background-color:{color};
-                    color:white;
-                    border-radius:10px;
-                    font-size:18px;
-                    font-weight:600;
-                    box-shadow:0px 4px 10px rgba(0,0,0,0.3);
-                ">
-                    {val}
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+            st.markdown(f"""
+            <div style="height:70px; display:flex; align-items:center; justify-content:center; 
+                        background-color:{color}; color:white; border-radius:10px; 
+                        font-size:18px; font-weight:600; box-shadow:0px 4px 10px rgba(0,0,0,0.3);">
+                {val}
+            </div>""", unsafe_allow_html=True)
+            st.caption(f"[{index}]")
 
-
-# -----------------------------
-# MAIN VISUALIZER
-# -----------------------------
 def show_sorting_bubble():
     home_button()
     st.title("Bubble Sort Visualizer 🔥")
+    
+    # ---------------- INIT STATE ----------------
+    if "arr" not in st.session_state: st.session_state.arr = [83, 63, 8, 21, 21]
+    if "i" not in st.session_state: st.session_state.i = 0
+    if "j" not in st.session_state: st.session_state.j = 0
+    if "running" not in st.session_state: st.session_state.running = False
+    if "swaps" not in st.session_state: st.session_state.swaps = 0
 
-    # ---------------- INIT ARRAY ----------------
-    if "arr" not in st.session_state:
-        st.session_state.arr = [50, 20, 40, 10, 30]
-
-    if "i" not in st.session_state:
-        st.session_state.i = 0
-
-    if "j" not in st.session_state:
-        st.session_state.j = 0
-
-    if "running" not in st.session_state:
-        st.session_state.running = False
-
-    # ---------------- USER INPUT ----------------
+    # ---------------- CUSTOM INPUT (Directly Visible) ----------------
     st.subheader("Custom Array Input")
-
-    user_input = st.text_input("Enter numbers separated by comma (e.g. 10,20,30)")
-
-    colA, colB = st.columns(2)
-
-    with colA:
-        if st.button("Set Custom Array"):
-            try:
-                arr = list(map(int, user_input.split(",")))
-                st.session_state.arr = arr
-                st.session_state.i = 0
-                st.session_state.j = 0
-            except:
-                st.warning("Invalid input format")
-
-    with colB:
-        if st.button("Reset Default"):
-            st.session_state.arr = [50, 20, 40, 10, 30]
-            st.session_state.i = 0
-            st.session_state.j = 0
-            st.session_state.running = False
-
-    arr = st.session_state.arr
-    n = len(arr)
+    user_input = st.text_input("Enter numbers (comma separated)", "83,63,8,21,21")
+    colA, colB = st.columns([1, 4])
+    
+    if colA.button("Apply"):
+        st.session_state.arr = list(map(int, user_input.split(",")))
+        st.session_state.i = st.session_state.j = st.session_state.swaps = 0
+        st.rerun()
+    if colB.button("Reset to Default"):
+        st.session_state.arr = [83, 63, 8, 21, 21]
+        st.session_state.i = st.session_state.j = st.session_state.swaps = 0
+        st.rerun()
 
     st.markdown("---")
 
-    # ---------------- SPEED CONTROL ----------------
-    speed = st.slider("Speed Control (seconds)", 0.1, 1.5, 0.5)
+    # ---------------- LAYOUT: CODE LEFT, VIS RIGHT ----------------
+    col_code, col_vis = st.columns([1, 1.2])
 
-    # ---------------- VISUAL ----------------
-    draw_bars(arr, st.session_state.i, st.session_state.j)
+    with col_code:
+        st.subheader("Algorithm Code")
+        st.code("""
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j+1]);
+            }
+        }
+    }
+}""", language="cpp")
 
-    st.markdown("---")
+    with col_vis:
+        st.subheader("Visualizer")
+        speed = st.slider("Speed", 0.1, 1.0, 0.5)
+        
+        c1, c2, c3 = st.columns(3)
+        if c1.button("▶ Play"): st.session_state.running = True
+        if c2.button("⏸ Pause"): st.session_state.running = False
+        if c3.button("Step"): bubble_step(st.session_state.arr); st.rerun()
 
-    # ---------------- CONTROLS ----------------
-    c1, c2, c3 = st.columns(3)
+        st.markdown(f"**Swaps:** {st.session_state.swaps}")
+        draw_bars(st.session_state.arr, st.session_state.i, st.session_state.j)
 
-    with c1:
-        if st.button("▶ Play / Pause"):
-            st.session_state.running = not st.session_state.running
-
-    with c2:
-        if st.button("Step-by-Step"):
-            bubble_step(arr)
-            st.rerun()
-
-    with c3:
-        if st.button("🔄 Reset"):
-            st.session_state.arr = [50, 20, 40, 10, 30]
-            st.session_state.i = 0
-            st.session_state.j = 0
-            st.session_state.running = False
-            st.rerun()
-
-    st.markdown("---")
-
-    # ---------------- AUTOPLAY ----------------
+    # ---------------- LOGIC ----------------
     if st.session_state.running:
-
-        bubble_step(arr)
+        bubble_step(st.session_state.arr)
         time.sleep(speed)
         st.rerun()
 
-# -----------------------------
-# LOGIC ENGINE
-# -----------------------------
+    # ---------------- EXPLANATION ----------------
+    st.markdown("---")
+    st.subheader("Understanding Bubble Sort")
+    st.write("""
+    Bubble Sort works by repeatedly swapping adjacent elements if they are in the wrong order. 
+    It is called "Bubble" sort because with each iteration, the largest element 'bubbles' 
+    up to its correct position at the end of the array.
+    """)
+    
+    st.markdown("### Complexity Analysis")
+    st.table({"Case": ["Best", "Average", "Worst"], "Complexity": ["O(n)", "O(n²)", "O(n²)"]})
+
 def bubble_step(arr):
-
-    i = st.session_state.i
-    j = st.session_state.j
     n = len(arr)
-
-    if i < n:
-
-        if j < n - i - 1:
-
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-
+    if st.session_state.i < n - 1:
+        if st.session_state.j < n - st.session_state.i - 1:
+            if arr[st.session_state.j] > arr[st.session_state.j + 1]:
+                arr[st.session_state.j], arr[st.session_state.j + 1] = arr[st.session_state.j + 1], arr[st.session_state.j]
+                st.session_state.swaps += 1
             st.session_state.j += 1
-
         else:
             st.session_state.i += 1
             st.session_state.j = 0
-
+    else:
+        st.session_state.running = False
     st.session_state.arr = arr
-    
-    
-    # CODE
-    with st.expander("View C++ Code"):
-        st.code("""
-#include<iostream>
-using namespace std;
-void display(int arr[], int sz){
-	for (int i=0; i<sz; i++){
-		cout<<arr[i]<<" ";
-	}
-	cout<<endl;
-}
-void bubblesort(int arr[], int sz){
-	int swap=0;
-	for(int i=0; i<sz-1; i++){
-		for(int j=0; j<sz-i-1; j++){
-			if(arr[j]>arr[j+1]){
-				int temp=arr[j];
-				arr[j]=arr[j+1];
-				arr[j+1]=temp;
-				swap++;
-			}
-		}
-		cout<<"After iteration"<<i<<": ";
-		display(arr,sz );
-	}
-			cout<<"Total swapping "<<swap<<endl;
-}
-int main(){
-	int size=6;
-	int arr[size]={9,3,1,6,2,4};
-	cout<<"Before Sort: ";
-	display(arr,size);
-	bubblesort(arr,size);
-	cout<<"After Sort: ";
-	display(arr,size);
-}
-        """)
