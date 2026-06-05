@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.title }}{% endblock %}
+
+{% block content %}
+<div class="topic-page">
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Breadcrumb" style="font-size:0.8rem;color:var(--text-muted);margin-bottom:20px;">
+    <a href="{{ url_for('dashboard') }}" style="color:var(--text-muted);">Dashboard</a>
+    <span style="margin:0 6px;">›</span>
+    <span style="color:var(--text-secondary);">{{ topic.category }}</span>
+    <span style="margin:0 6px;">›</span>
+    <span>{{ topic.title }}</span>
+  </nav>
+
+  <!-- Header -->
+  <div class="topic-page-header">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+      <span class="difficulty-badge {{ topic.difficulty | lower }}">{{ topic.difficulty }}</span>
+      <span class="text-muted" style="font-size:0.8rem;font-family:var(--font-mono);">#{{ topic.category }}</span>
+    </div>
+    <h1>{{ topic.title }}</h1>
+    <p style="color:var(--text-secondary);font-size:0.95rem;margin-top:6px;">{{ topic.description }}</p>
+  </div>
+
+  <!-- Overview Card -->
+  <div class="topic-content-card">
+    <h2>📘 Overview</h2>
+    <p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7;">
+      This section covers <strong style="color:var(--text-primary);">{{ topic.title }}</strong>,
+      a fundamental concept in the
+      <em style="color:var(--accent-blue);">{{ topic.category }}</em> category.
+      Mastering this topic will give you a strong foundation for solving algorithmic problems
+      efficiently and confidently in technical interviews.
+    </p>
+  </div>
+
+  <!-- Key Concepts Card -->
+  <div class="topic-content-card">
+    <h2>⚡ Key Concepts</h2>
+    <ul style="color:var(--text-secondary);font-size:0.875rem;line-height:2;padding-left:18px;">
+      <li>Core theory and intuition behind <strong style="color:var(--text-primary);">{{ topic.title }}</strong></li>
+      <li>Time complexity analysis and Big-O notation</li>
+      <li>Space complexity considerations</li>
+      <li>Common edge cases and pitfalls</li>
+      <li>Real-world applications and use cases</li>
+    </ul>
+  </div>
+
+  <!-- Pseudocode Card -->
+  <div class="topic-content-card">
+    <h2>💻 Pseudocode Template</h2>
+    <p style="color:var(--text-secondary);font-size:0.875rem;margin-bottom:4px;">
+      Generic algorithm skeleton — adapt for your specific problem:
+    </p>
+    <pre class="code-block"><code>function solve(input):
+    # 1. Validate input / handle edge cases
+    if input is empty:
+        return base_case
+
+    # 2. Initialise data structure(s)
+    result = []
+
+    # 3. Core logic — {{ topic.title }}
+    for element in input:
+        process(element)
+        update(result)
+
+    # 4. Return result
+    return result</code></pre>
+  </div>
+
+  <!-- Complexity Card -->
+  <div class="topic-content-card">
+    <h2>📊 Complexity Analysis</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+      <thead>
+        <tr style="border-bottom:1px solid var(--border);">
+          <th style="text-align:left;padding:8px 12px;color:var(--text-muted);font-weight:600;font-family:var(--font-mono);">Case</th>
+          <th style="text-align:left;padding:8px 12px;color:var(--text-muted);font-weight:600;font-family:var(--font-mono);">Time</th>
+          <th style="text-align:left;padding:8px 12px;color:var(--text-muted);font-weight:600;font-family:var(--font-mono);">Space</th>
+        </tr>
+      </thead>
+      <tbody style="color:var(--text-secondary);">
+        <tr style="border-bottom:1px solid var(--border-subtle);">
+          <td style="padding:8px 12px;">Best</td>
+          <td style="padding:8px 12px;color:var(--accent-teal);font-family:var(--font-mono);">O(log n)</td>
+          <td style="padding:8px 12px;font-family:var(--font-mono);">O(1)</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border-subtle);">
+          <td style="padding:8px 12px;">Average</td>
+          <td style="padding:8px 12px;color:var(--accent-orange);font-family:var(--font-mono);">O(n log n)</td>
+          <td style="padding:8px 12px;font-family:var(--font-mono);">O(n)</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 12px;">Worst</td>
+          <td style="padding:8px 12px;color:var(--accent-red);font-family:var(--font-mono);">O(n²)</td>
+          <td style="padding:8px 12px;font-family:var(--font-mono);">O(n)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Back link -->
+  <a href="{{ url_for('dashboard') }}" class="btn btn-secondary" style="margin-top:8px;">
+    ← Back to Dashboard
+  </a>
+
+</div>
+
+<!-- Floating mark-complete button -->
+<button
+  class="btn {% if completed %}btn-primary{% else %}btn-outline{% endif %} btn-lg mark-complete-btn"
+  data-complete-btn
+  data-topic-id="{{ topic.id }}"
+  data-state="{{ 'completed' if completed else 'pending' }}"
+  aria-pressed="{{ 'true' if completed else 'false' }}"
+>
+  {{ '✓  Completed' if completed else 'Mark as Complete' }}
+</button>
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrap">
+
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div>
+      <div class="dashboard-greeting">
+        Hey, <span>{{ user.username }}</span> 👋
+      </div>
+      <p class="text-muted" style="font-size:0.875rem;margin-top:4px;">
+        Track your DSA progress below. Keep going!
+      </p>
+    </div>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">← Browse All Topics</a>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row" aria-label="Progress statistics">
+    <div class="stat-card">
+      <div class="stat-value" id="completedTopics">{{ completed }}</div>
+      <div class="stat-label">Completed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="totalTopics" style="color:var(--text-secondary);">{{ total }}</div>
+      <div class="stat-label">Total Topics</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="progressPct" style="color:var(--accent-teal);">
+        {{ ((completed / total * 100) | round | int) if total else 0 }}%
+      </div>
+      <div class="stat-label">Completion Rate</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" style="color:var(--accent-purple);">
+        {{ user.created_at[:10] if user.created_at else '—' }}
+      </div>
+      <div class="stat-label">Member Since</div>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar-wrap" role="progressbar"
+       aria-valuenow="{{ completed }}" aria-valuemin="0" aria-valuemax="{{ total }}"
+       aria-label="Overall progress">
+    <div class="progress-bar-fill"
+         style="width: {{ ((completed / total * 100) | round | int) if total else 0 }}%">
+    </div>
+  </div>
+
+  <!-- Topic Categories -->
+  {% for category, topics in categories.items() %}
+    <div class="category-group">
+      <div class="category-label">
+        <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5v-3z"/>
+        </svg>
+        {{ category }}
+      </div>
+
+      <div class="topic-grid" role="list">
+        {% for t in topics %}
+          <div class="topic-card" role="listitem" style="cursor:default;">
+
+            <!-- Completed dot indicator -->
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;">
+              <div class="topic-card-title">{{ t.title }}</div>
+              <div class="completed-dot"
+                   data-dot="{{ t.id }}"
+                   style="display: {{ 'block' if t.completed else 'none' }};
+                          flex-shrink:0; margin-top:4px;"
+                   aria-label="Completed" title="Completed">
+              </div>
+            </div>
+
+            <div class="topic-card-desc">{{ t.description }}</div>
+
+            <div class="topic-card-footer">
+              <span class="difficulty-badge {{ t.difficulty | lower }}">{{ t.difficulty }}</span>
+
+              <div style="display:flex;gap:6px;align-items:center;">
+                <a href="{{ url_for('topic', slug=t.slug) }}"
+                   class="btn btn-outline" style="padding:4px 10px;font-size:0.75rem;">
+                  Study →
+                </a>
+                <button
+                  class="btn {% if t.completed %}btn-primary{% else %}btn-outline{% endif %}"
+                  style="padding:4px 10px;font-size:0.75rem;"
+                  data-complete-btn
+                  data-topic-id="{{ t.id }}"
+                  data-state="{{ 'completed' if t.completed else 'pending' }}"
+                  aria-pressed="{{ 'true' if t.completed else 'false' }}"
+                >
+                  {{ '✓ Completed' if t.completed else 'Mark Done' }}
+                </button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+
+</div>
+{% endblock %}
