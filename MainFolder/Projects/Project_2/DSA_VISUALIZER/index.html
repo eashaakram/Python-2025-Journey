@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DSA Visualizer by Easha Akram — interactive Data Structures & Algorithms learning platform">
+  <meta name="author" content="Easha Akram">
+  <title>DSA Visualizer — Easha Akram</title>
+  <link rel="stylesheet" href="css/design-system.css">
+</head>
+<body>
+
+  <!-- shell.js injects header -->
+
+  <main>
+    <div class="land-wrap" role="main">
+
+      <!-- Avatar + Name (like codeflames) -->
+      <div class="land-avatar" aria-hidden="true">EA</div>
+      <div class="land-name">Easha Akram</div>
+      <div class="land-role">// DSA Learning Platform &nbsp;·&nbsp; Interactive Visualizer</div>
+
+      <!-- Hero -->
+      <div class="land-hero">
+        <h1>
+          Learn <span class="hl">Data Structures</span><br>
+          &amp; Algorithms Visually
+        </h1>
+        <p>
+          An interactive DSA learning platform designed for students who want to master
+          Data Structures &amp; Algorithms through clear visualizations, step-by-step
+          animations, and C++ code side-by-side.
+        </p>
+
+        <!-- ONLY ONE BUTTON - BROWSE REMOVED -->
+        <div class="land-cta">
+          <button class="btn btn-primary btn-lg" id="startBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            Begin Your DSA Journey
+          </button>
+          <!-- BROWSER TOPICS BUTTON REMOVED ✅ -->
+        </div>
+      </div>
+
+      <!-- Feature cards -->
+      <div class="land-features">
+
+        <div class="feat-card">
+          <div class="feat-icon">📊</div>
+          <h3>Sorting Algorithms</h3>
+          <p>Animate Bubble, Insertion &amp; Selection Sort with swap counters and step-by-step C++ code.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">🔍</div>
+          <h3>Searching Algorithms</h3>
+          <p>Watch Linear Search scan sequentially and Binary Search divide the array in real time.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">🔗</div>
+          <h3>Data Structures</h3>
+          <p>Insert &amp; delete in Linked Lists. Enqueue &amp; dequeue in Simple and Circular Queues.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon">🌳</div>
+          <h3>Trees</h3>
+          <p>Visualize BST and self-balancing AVL Trees with Balance Factor and rotation display.</p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- shell.js injects footer -->
+
+  <script src="js/shell.js"></script>
+  <script>
+    /* ── Start button: check login then redirect ──────────── */
+    document.getElementById("startBtn").addEventListener("click", () => {
+      if (Shell.session.get()) {
+        location.href = "topics.html";
+      } else {
+        location.href = "login.html?next=topics.html";
+      }
+    });
+  </script>
+</body>
+</html>
