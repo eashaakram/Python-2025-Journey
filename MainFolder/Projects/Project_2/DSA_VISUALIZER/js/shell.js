@@ -11,7 +11,7 @@
 const INSTRUCTOR = "Easha Akram";
 const YEAR       = new Date().getFullYear();
 
-/* ── Session helpers (NO EXPIRY - only manual sign out) ───── */
+/* ── Session helpers  ───── */
 const Session = {
   get()  { try { return JSON.parse(localStorage.getItem("dsa_session")); } catch { return null; } },
   set(u) { localStorage.setItem("dsa_session", JSON.stringify(u)); },
@@ -145,8 +145,8 @@ function buildFooter() {
       </div>
       <div class="footer-col">
         <h4>Data Structures</h4>
-        <a href="${B}structures.html">Linked List</a>
-        <a href="${B}structures.html">Queue</a>
+        <a href="${B}linkedlist.html">Linked List</a>
+        <a href="${B}queue.html">Queue</a>
         <a href="${B}trees.html">Trees</a>
       </div>
       <div class="footer-col">
@@ -192,7 +192,7 @@ function mountShell() {
 function authGuard() {
   const session = Session.get();
   const cur = currentFile();
-  const protectedPages = ['topics.html', 'sorting.html', 'searching.html', 'structures.html', 'trees.html'];
+  const protectedPages = ['topics.html', 'sorting.html', 'searching.html', 'linkedlist.html', 'queue.html', 'trees.html'];
   
   if (protectedPages.includes(cur)) {
     if (!session || !session.email) {
