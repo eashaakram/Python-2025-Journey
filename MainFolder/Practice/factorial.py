@@ -11,3 +11,4 @@ else:
         factorial *= i
     # print(f"The factorial of {number} is {factorial}")
     print("The factorial of",number,"is",factorial)
+    
