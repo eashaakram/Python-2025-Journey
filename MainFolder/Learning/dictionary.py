@@ -14,8 +14,8 @@ print(info.keys())
 # accessing values
 print(info.values())
 
-# for key in info.keys(): 
-#     print(info[key])
+for key in info.keys(): 
+    print(info[key])
 
 # for key in info.keys():
 #     print(f"The value of corresponding to key {key} is {info[key]}")
@@ -34,9 +34,12 @@ print(info.items())
 #Dictionary Methods
 ep1={122:45, 78:82}
 ep2={823:63, 72:27}
+print("Ep1: ",ep1)
+print("Ep2: ",ep2)
 ep1.update(ep2)
+print("Update Ep1 with Ep2: ",ep1)
 ep1.clear() #it will print empty dictionary
-print(ep1)
+print("All clear: ",ep1)
 
 #create empty dictionary
 empt = {}

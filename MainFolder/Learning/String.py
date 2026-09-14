@@ -59,6 +59,8 @@ start = 0
 while(start <= len(country)-1):
     print(country[start],end="")
     start+=1
+print("\n")
+
 #another method of for loop
 for i in country:
     print(i)
@@ -68,3 +70,10 @@ name = "AR"
     #print(f"At index {i} the value is {j})
 for i,j in enumerate(name):
     print("At index",i,"the value is",j)
+
+password = "Python123@"
+print("Password Length: ", len(password))
+print("Contains uppercase: ", any(letter.isupper() for letter in password))
+print("Contains lowercase: ", any(letter.islower() for letter in password))
+print("Contains number: ", any(letter.isdigit() for letter in password))
+# print("Contains special character: ", any(letter.is() for letter in password))

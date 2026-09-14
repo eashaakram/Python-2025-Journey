@@ -9,13 +9,14 @@ print(info)
 #Set is unordered
 for value in info:
     print(value,end=" ")
+print("\n")
 
 #Sets Methods
 s1 = {1,2,5,6}
 s2 = {3,6,4,7}
 print("Union =",s1.union(s2))
 s1.update(s2)
-print("Update =",s1,s2)
+print("Update s1 =",s1,",s2 =",s2)
 
 cities = {"Lahore", "Karachi", "Gujranwala", "Islamabad", "KPK"}
 cities2 = {"Lahore", "Karachi", "KPK", "RWP"}
